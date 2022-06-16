@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginBottom: 10,
+    backgroundColor: "white",
   },
   name: {
     fontSize: 15,
