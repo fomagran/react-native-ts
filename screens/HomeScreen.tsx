@@ -4,6 +4,7 @@ import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import data from "../data.json";
 import { Workout } from "../models/workout";
 import WorkoutItem from "../components/WorkoutItem";
+import { FontText } from "../components/styled/FontText";
 
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>New Workouts</Text>
+      <FontText style={styles.header}>New Workouts</FontText>
       <FlatList
         data={data as Array<Workout>}
         renderItem={WorkoutItem}
@@ -31,6 +32,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
     fontWeight: "bold",
-    fontFamily: "anton-regular",
   },
 });
