@@ -2,9 +2,18 @@ import { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import data from "../data.json";
+import { Workout } from "../models/workout";
 
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
-  const renderItem = ({ item }: any) => {
+  const workout: Workout = {
+    slug: "slug",
+    name: "Fomagran",
+    duration: 123,
+    difficulty: "hard",
+    sequence: [],
+  };
+
+  const renderItem = ({ item }: { item: Workout }) => {
     return (
       <View>
         <Text>{item.name}</Text>
@@ -20,7 +29,7 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={data as Array<Workout>}
         renderItem={renderItem}
         keyExtractor={(item) => item.slug}
       />
