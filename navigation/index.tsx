@@ -5,6 +5,7 @@ import { Entypo, FontAwesome } from "@expo/vector-icons";
 
 import HomeScreen from "../screens/HomeScreen";
 import PlannerScreen from "../screens/PlannerScreen";
+import WorkoutDetailScreen from "../screens/WorkoutDetailScreen";
 
 export default function Navigation() {
   return (
@@ -23,6 +24,7 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="WorkoutDetail" component={WorkoutDetailScreen} />
     </Stack.Navigator>
   );
 }

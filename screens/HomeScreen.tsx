@@ -7,14 +7,6 @@ import WorkoutItem from "../components/WorkoutItem";
 import { FontText } from "../components/styled/FontText";
 import { Pressable } from "react-native";
 
-const PressableItem = ({ item }: { item: Workout }) => {
-  return (
-    <Pressable onPress={() => alert(`I am pressed - ${item.slug}`)}>
-      <WorkoutItem item={item} />
-    </Pressable>
-  );
-};
-
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   useEffect(() => {
     console.log("Rendering Home Screen");
@@ -25,7 +17,13 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
       <FontText style={styles.header}>New Workouts</FontText>
       <FlatList
         data={data as Array<Workout>}
-        renderItem={PressableItem}
+        renderItem={({ item }: { item: Workout }) => {
+          return (
+            <Pressable onPress={() => navigation.navigate("WorkoutDetail")}>
+              <WorkoutItem item={item} />
+            </Pressable>
+          );
+        }}
         keyExtractor={(item) => item.slug}
       />
     </View>
