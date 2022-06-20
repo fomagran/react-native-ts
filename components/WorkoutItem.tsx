@@ -16,7 +16,7 @@ export default function WorkoutItem({
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.duration}>Duration:{formatSec(item.duration)}</Text>
       <Text style={styles.difficulty}>Difficulty:{item.difficulty}</Text>
-      {children && <View>{children}</View>}
+      {children && <View style={childStyles}>{children}</View>}
     </View>
   );
 }
