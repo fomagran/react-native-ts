@@ -37,7 +37,12 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   }, [countDown]);
 
   const addItemToSequence = (idx: number) => {
-    const newSequence = [...sequence, workout!.sequence[idx]];
+    let newSequence: any[] = [];
+    if (idx > 0) {
+      newSequence = [...sequence, workout!.sequence[idx]];
+    } else {
+      newSequence = [workout!.sequence[idx]];
+    }
     setSequence(newSequence);
     setTrackerIdx(idx);
     start(newSequence[idx].duration);
@@ -89,7 +94,9 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
           <FontAwesome
             name="play-circle-o"
             size={100}
-            onPress={() => start(countDown)}
+            onPress={() =>
+              hasReachedEnd ? addItemToSequence(0) : start(countDown)
+            }
           ></FontAwesome>
         )}
         {sequence.length > 0 && countDown >= 0 && <View>{countDown}</View>}
