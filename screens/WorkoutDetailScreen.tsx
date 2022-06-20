@@ -24,10 +24,7 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   const [sequence, setSequence] = useState<Sequence[]>([]);
   const workout = useWorkoutBySlug(route.params.slug);
   const [trackerIdx, setTrackerIdx] = useState(-1);
-  const countDown = useCountDown(
-    trackerIdx,
-    trackerIdx >= 0 ? sequence[trackerIdx].duration : -1
-  );
+  const { countDown, isRunning, stop, start } = useCountDown(trackerIdx);
 
   useEffect(() => {
     if (!workout) return;
@@ -40,8 +37,10 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   }, [countDown]);
 
   const addItemToSequence = (idx: number) => {
-    setSequence([...sequence, workout!.sequence[idx]]);
+    const newSequence = [...sequence, workout!.sequence[idx]];
+    setSequence(newSequence);
     setTrackerIdx(idx);
+    start(newSequence[idx].duration);
   };
 
   if (!workout) {
@@ -74,11 +73,23 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
         </Modal>
       </WorkoutItem>
       <View>
-        {sequence.length === 0 && (
+        {sequence.length === 0 ? (
           <FontAwesome
             name="play-circle-o"
             size={100}
             onPress={() => addItemToSequence(0)}
+          ></FontAwesome>
+        ) : isRunning ? (
+          <FontAwesome
+            name="stop-circle-o"
+            size={100}
+            onPress={() => stop()}
+          ></FontAwesome>
+        ) : (
+          <FontAwesome
+            name="play-circle-o"
+            size={100}
+            onPress={() => start(countDown)}
           ></FontAwesome>
         )}
         {sequence.length > 0 && countDown >= 0 && <View>{countDown}</View>}
