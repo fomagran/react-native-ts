@@ -28,8 +28,12 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
         activator={({ handleOpen }) => (
           <PressableText onPress={handleOpen} text="Alert" />
         )}
-      ></Modal>
-      <Modal />
+      >
+        <Text>Hello, This is a Modal View</Text>
+      </Modal>
+      <Modal>
+        <Text>Hello, This is Modal View</Text>
+      </Modal>
     </View>
   );
 }
