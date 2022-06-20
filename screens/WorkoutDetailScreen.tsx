@@ -29,6 +29,16 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
     trackerIdx >= 0 ? sequence[trackerIdx].duration : -1
   );
 
+  useEffect(() => {
+    if (!workout) return;
+
+    if (trackerIdx === workout.sequence.length - 1) return;
+
+    if (countDown === 0) {
+      addItemToSequence(trackerIdx + 1);
+    }
+  }, [countDown]);
+
   const addItemToSequence = (idx: number) => {
     setSequence([...sequence, workout!.sequence[idx]]);
     setTrackerIdx(idx);
@@ -37,6 +47,9 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   if (!workout) {
     return null;
   }
+
+  const hasReachedEnd =
+    sequence.length === workout.sequence.length && countDown == 0;
 
   return (
     <View style={styles.container}>
@@ -68,6 +81,14 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
             onPress={() => addItemToSequence(0)}
           ></FontAwesome>
         )}
+        {sequence.length > 0 && countDown >= 0 && <View>{countDown}</View>}
+        <Text>
+          {sequence.length === 0
+            ? "Prepare"
+            : hasReachedEnd
+            ? "Great Jobs"
+            : sequence[trackerIdx].name}
+        </Text>
       </View>
     </View>
   );
