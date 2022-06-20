@@ -1,5 +1,6 @@
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { Modal } from "../components/styled/Modal";
 import { PressableText } from "../components/styled/PressableText";
 import { useWorkoutBySlug } from "../hooks/useWorkoutBySlug";
 
@@ -23,8 +24,12 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{workout?.name}</Text>
-      <PressableText onPress={() => alert("open")} text="Check"></PressableText>
-      <PressableText onPress={() => alert("Hi")} text="Hi"></PressableText>
+      <Modal
+        activator={({ handleOpen }) => (
+          <PressableText onPress={handleOpen} text="Alert" />
+        )}
+      ></Modal>
+      <Modal />
     </View>
   );
 }
@@ -38,5 +43,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
     fontWeight: "bold",
+  },
+  contentView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
