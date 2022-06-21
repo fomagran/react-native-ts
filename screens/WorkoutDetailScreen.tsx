@@ -64,18 +64,20 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
             <PressableText onPress={handleOpen} text="Show Sequence" />
           )}
         >
-          <View>
-            {workout.sequence.map((seq, idx) => (
-              <View key={seq.slug} style={styles.sequenceItem}>
-                <Text>
-                  {seq.name} | {seq.type} | {formatSec(seq.duration)}
-                </Text>
-                {idx !== workout.sequence.length - 1 && (
-                  <FontAwesome name="arrow-down" size={20}></FontAwesome>
-                )}
-              </View>
-            ))}
-          </View>
+          {() => (
+            <View>
+              {workout.sequence.map((seq, idx) => (
+                <View key={seq.slug} style={styles.sequenceItem}>
+                  <Text>
+                    {seq.name} | {seq.type} | {formatSec(seq.duration)}
+                  </Text>
+                  {idx !== workout.sequence.length - 1 && (
+                    <FontAwesome name="arrow-down" size={20}></FontAwesome>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
         </Modal>
       </WorkoutItem>
       <View style={styles.wrapper}>
