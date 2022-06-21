@@ -25,6 +25,7 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   const workout = useWorkoutBySlug(route.params.slug);
   const [trackerIdx, setTrackerIdx] = useState(-1);
   const { countDown, isRunning, stop, start } = useCountDown(trackerIdx);
+  const readySeq = ["Go!", "1", "2", "3"];
 
   useEffect(() => {
     if (!workout) return;
@@ -45,7 +46,7 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
     }
     setSequence(newSequence);
     setTrackerIdx(idx);
-    start(newSequence[idx].duration);
+    start(newSequence[idx].duration + readySeq.length);
   };
 
   if (!workout) {
@@ -99,7 +100,13 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
             }
           ></FontAwesome>
         )}
-        {sequence.length > 0 && countDown >= 0 && <View>{countDown}</View>}
+        {sequence.length > 0 && countDown >= 0 && (
+          <View>
+            {countDown > sequence[trackerIdx].duration
+              ? readySeq[countDown - sequence[trackerIdx].duration - 1]
+              : countDown}
+          </View>
+        )}
         <Text>
           {sequence.length === 0
             ? "Prepare"
