@@ -1,15 +1,13 @@
-import { useEffect } from "react";
 import { View, Text, Button } from "react-native";
+import WorkoutForm, { ExerciseForm } from "../components/WorkoutForm";
 
 export default function PlannerScreen({ navigation }: any) {
-  useEffect(() => {
-    console.log("Rendering Planner Screen");
-  }, []);
-
+  const handleFormSubmit = (form: ExerciseForm) => {
+    alert(`${form.name} ${form.duration}`);
+  };
   return (
     <View>
-      <Text>I am a planner screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
+      <WorkoutForm onSubmit={handleFormSubmit} />
     </View>
   );
 }
