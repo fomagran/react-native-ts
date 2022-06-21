@@ -78,42 +78,44 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
           </View>
         </Modal>
       </WorkoutItem>
-      <View>
-        {sequence.length === 0 ? (
-          <FontAwesome
-            name="play-circle-o"
-            size={100}
-            onPress={() => addItemToSequence(0)}
-          ></FontAwesome>
-        ) : isRunning ? (
-          <FontAwesome
-            name="stop-circle-o"
-            size={100}
-            onPress={() => stop()}
-          ></FontAwesome>
-        ) : (
-          <FontAwesome
-            name="play-circle-o"
-            size={100}
-            onPress={() =>
-              hasReachedEnd ? addItemToSequence(0) : start(countDown)
-            }
-          ></FontAwesome>
-        )}
-        {sequence.length > 0 && countDown >= 0 && (
-          <View>
-            {countDown > sequence[trackerIdx].duration
-              ? readySeq[countDown - sequence[trackerIdx].duration - 1]
-              : countDown}
-          </View>
-        )}
-        <Text>
-          {sequence.length === 0
-            ? "Prepare"
-            : hasReachedEnd
-            ? "Great Jobs"
-            : sequence[trackerIdx].name}
-        </Text>
+      <View style={styles.wrapper}>
+        <View>
+          {sequence.length === 0 ? (
+            <FontAwesome
+              name="play-circle-o"
+              size={100}
+              onPress={() => addItemToSequence(0)}
+            ></FontAwesome>
+          ) : isRunning ? (
+            <FontAwesome
+              name="stop-circle-o"
+              size={100}
+              onPress={() => stop()}
+            ></FontAwesome>
+          ) : (
+            <FontAwesome
+              name="play-circle-o"
+              size={100}
+              onPress={() =>
+                hasReachedEnd ? addItemToSequence(0) : start(countDown)
+              }
+            ></FontAwesome>
+          )}
+          {sequence.length > 0 && countDown >= 0 && (
+            <View>
+              {countDown > sequence[trackerIdx].duration
+                ? readySeq[countDown - sequence[trackerIdx].duration - 1]
+                : countDown}
+            </View>
+          )}
+          <Text>
+            {sequence.length === 0
+              ? "Prepare"
+              : hasReachedEnd
+              ? "Great Jobs"
+              : sequence[trackerIdx].name}
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -136,5 +138,12 @@ const styles = StyleSheet.create({
   },
   sequenceItem: {
     alignItems: "center",
+  },
+  wrapper: {
+    borderRadius: 10,
+    borderColor: "rgba(0,0,0,0.1)",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    padding: 10,
   },
 });
