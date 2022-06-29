@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
 import WorkoutItem from "../components/WorkoutItem";
@@ -16,17 +16,23 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
         data={workouts}
         renderItem={({ item }) => {
           return (
-            <Pressable
-              onPress={() =>
-                navigation.navigate("WorkoutDetail", { slug: item.slug })
-              }
-            >
-              <WorkoutItem item={item} />
-            </Pressable>
+            <View>
+              <Pressable
+                onPress={() =>
+                  navigation.navigate("WorkoutDetail", { slug: item.slug })
+                }
+              >
+                <WorkoutItem item={item} />
+              </Pressable>
+            </View>
           );
         }}
         keyExtractor={(item) => item.slug}
       />
+      <Button
+        title="Go Redux Article Screen"
+        onPress={() => navigation.navigate("ReduxArticle")}
+      ></Button>
     </View>
   );
 }
