@@ -6,7 +6,6 @@ import { Entypo, FontAwesome } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import PlannerScreen from "../screens/PlannerScreen";
 import WorkoutDetailScreen from "../screens/WorkoutDetailScreen";
-import ReduxArticle from "../Redux/Screens/ReduxCounter";
 
 export default function Navigation() {
   return (
